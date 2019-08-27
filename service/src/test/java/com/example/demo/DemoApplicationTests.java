@@ -50,6 +50,11 @@ public class DemoApplicationTests {
         System.out.println(str);
         System.out.println(integer);
     }
+    @Test
+    public void test1() {
+        Integer a=1;
+        System.out.println(a!=null);
+    }
 
     private void changeInt(Integer integer) {
         integer++;
