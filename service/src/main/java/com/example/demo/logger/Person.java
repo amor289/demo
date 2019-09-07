@@ -2,6 +2,8 @@ package com.example.demo.logger;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 描述:
  * 日志实体
@@ -11,10 +13,14 @@ import lombok.Data;
  */
 @Data
 public class Person {
-    @LogField(name = "姓名",entityName = "真实姓名")
+
+    @LogField(name = "姓名", entityName = "真实姓名")
     private String name;
-    @LogField(name = "年龄",entityName = "真实年龄")
+
+    @LogField(name = "年龄", entityName = "真实年龄")
     private String age;
-    @LogField(name = "孩子",entityName = "儿子")
-    private Person child;
+
+    @LogField(name = "孩子", entityName = "孩子")
+    private List<Person> child;
+
 }

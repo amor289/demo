@@ -23,15 +23,19 @@ import java.util.Map;
  */
 public final class LogUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogUtils.class);
-    /**操作类型：add 新增**/
+    /**
+     * 操作类型：add 新增
+     **/
     private static final String ADD_TYPE = "add";
-    /**操作类型：update 修改**/
+    /**
+     * 操作类型：update 修改
+     **/
     private static final String UPDATE_TYPE = "update";
 
     /**
      * 获取新增操作的日志内容
      *
-     * @param obj 页面对象，必传
+     * @param obj    页面对象，必传
      * @param objMap 对象日志常量内容，不必传
      * @return String 获取操作后日志
      */
@@ -54,10 +58,10 @@ public final class LogUtils {
     /**
      * 获取修改操作的日志内容
      *
-     * @param obj1 数据库对象，必传
-     * @param obj2 页面对象，必传
+     * @param obj1   数据库对象，必传
+     * @param obj2   页面对象，必传
      * @param objMap 对象日志常量内容，不必传
-     * @return map.get("before")获取操作前日志，map.get("after")获取操作后日志
+     * @return map.get(" before ")获取操作前日志，map.get("after")获取操作后日志
      */
     public static Map<String, String> getUpdateLogs(Object obj1, Object obj2, Map<String, String> objMap) {
         // 操作前
@@ -101,7 +105,7 @@ public final class LogUtils {
     /**
      * 日志常量内容替换
      *
-     * @param logs 日志内容
+     * @param logs   日志内容
      * @param objMap 日志常量内容
      * @return
      */
@@ -124,8 +128,8 @@ public final class LogUtils {
     /**
      * 获取对象注解内容、属性值
      *
-     * @param t 实体对象
-     * @param fields 操作注解的对象
+     * @param t           实体对象
+     * @param fields      操作注解的对象
      * @param operateType 操作类型：add 新增， update 修改
      * @return
      */
@@ -134,6 +138,7 @@ public final class LogUtils {
         for (Field field : fields) {
             LogField annotation = field.getAnnotation(LogField.class);
             if (annotation != null && StringUtils.isNotBlank(annotation.name())) {
+                field.setAccessible(true);
                 Class<?> type = field.getType();
                 String fieldName = field.getName();
                 String methodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
@@ -142,7 +147,7 @@ public final class LogUtils {
                     Object value = ReflectionUtils.invokeMethod(method, t);
                     if (ADD_TYPE.equals(operateType)) {
                         if (value != null && StringUtils.isNotBlank(value + "")) {
-                            map.put(annotation.name(), type == Date.class ? DateFormatUtils.format((Date)value,
+                            map.put(annotation.name(), type == Date.class ? DateFormatUtils.format((Date) value,
                                     "yyyy-MM-dd HH:mm:ss") : String.valueOf(value));
                         }
                         continue;
@@ -150,7 +155,7 @@ public final class LogUtils {
                     if (value == null || StringUtils.isBlank(value + "") || "null".equals(value)) {
                         map.put(annotation.name(), "空");
                     } else {
-                        map.put(annotation.name(), type == Date.class ? DateFormatUtils.format((Date)value,
+                        map.put(annotation.name(), type == Date.class ? DateFormatUtils.format((Date) value,
                                 "yyyy-MM-dd HH:mm:ss") : String.valueOf(value));
                     }
                 }
@@ -162,7 +167,7 @@ public final class LogUtils {
     /**
      * 查找实体类内的实体对象属性，并处理之
      *
-     * @param fields 操作注解的对象
+     * @param fields      操作注解的对象
      * @param operateType 操作类型：add 新增， update 修改
      * @return
      */

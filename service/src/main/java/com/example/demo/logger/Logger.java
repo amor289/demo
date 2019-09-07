@@ -16,17 +16,17 @@ public class Logger {
         aa.setName("amor949");
         aa.setAge("23");
         Person bb = new Person();
-        bb.setName("大笨蛋");
+        bb.setName("flere210");
         bb.setAge("20");
         Person cc = new Person();
-        cc.setName("小大笨蛋");
+        cc.setName("flere211");
         cc.setAge("1");
-        bb.setChild(cc);
-        aa.setChild(bb);
+        /*bb.setChild(cc);
+        aa.setChild(bb);*/
         String addLogs = LogUtils.getAddLogs(aa, null);
         System.out.println(addLogs);
 
-        /*Map<String, String> updateLogs = LogUtils.getUpdateLogs(aa, bb, null);
-        updateLogs.forEach((k,v)->System.out.println(k+"="+v));*/
+        Map<String, String> updateLogs = LogUtils.getUpdateLogs(aa, bb, null);
+        updateLogs.forEach((k,v)->System.out.println(k+"="+v));
     }
 }
