@@ -71,7 +71,7 @@ public class DemoApplicationTests {
     @Test
     public void test1() {
         List<Integer> list = Arrays.asList(1,1,1,1);
-        Integer result = list.stream().reduce(2, Integer::sum, (a, b) -> a + b);
+        Integer result = list.stream().reduce(2, Integer::sum, Integer::sum);
         System.out.println(result);
     }
 
